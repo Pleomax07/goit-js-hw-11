@@ -26,7 +26,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 80px;
+  padding: 20px 80px;
   background-color: rgba(192, 188, 188, 0.5);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 10px rgba(0, 0, 0, 0.14),
     0px 2px 10px rgba(0, 0, 0, 0.2);
@@ -50,8 +50,8 @@ img {
 }
 
 .input {
-  width: 500px;
-  height: 30px;
+  width: 450px;
+  height: 20px;
   border-radius: 4px;
   margin-right: 30px;
   font-family: raleway;
@@ -125,7 +125,7 @@ img {
 }
 
 .photo-card {
-max-width: 400px;
+max-width: 300px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 10px rgba(0, 0, 0, 0.14),
     0px 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
