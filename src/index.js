@@ -5,15 +5,12 @@ import { marcupImageCard } from './marcup';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 const axios = require('axios').default;
 
-refs = {
+const refs = {
   form: document.querySelector('#search-form'),
   imageCard: document.querySelector('.gallery'),
   // loadMoreBTN: document.querySelector('.load-more'),
   box: document.querySelector('.box'),
 };
-
-const { height: cardHeight } = document
-  
 
 refs.form.addEventListener('submit', onFormSubmit);
 // refs.loadMoreBTN.addEventListener('click', onloadMoreClick);
@@ -39,38 +36,32 @@ export async function onFormSubmit(e) {
   apiPhotoService.page = 1;
   try {
     const [images, total] = await apiPhotoService.getImages();
-  refs.imageCard.innerHTML = marcupImageCard(images);
-  lightBox.refresh();
-  apiPhotoService.hitsTotal = total;
-  createObserver()
-  imagesValue += images.length
-  } catch(error) {
-    Notiflix.Notify.failure(`❌ Sorry, there are no images matching your search query. Please try again.`);
+    refs.imageCard.innerHTML = marcupImageCard(images);
+    lightBox.refresh();
+    apiPhotoService.hitsTotal = total;
+    createObserver();
+    imagesValue += images.length;
+  } catch (error) {
+    Notiflix.Notify.failure(
+      `❌ Sorry, there are no images matching your search query. Please try again.`
+    );
     // Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
   }
-  
-  // плавная прокрутка
-  refs.imageCard.firstElementChild.getBoundingClientRect();
-
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: "smooth",
-  });
-  
-
 }
 
 async function onloadMoreClick() {
   apiPhotoService.incrementPage();
-  if(imagesValue >= apiPhotoService.hitsTotal) {
-    Notiflix.Notify.warning(`❌ We're sorry, but you've reached the end of search results.`);
-   
+  if (imagesValue >= apiPhotoService.hitsTotal) {
+    Notiflix.Notify.warning(
+      `❌ We're sorry, but you've reached the end of search results.`
+    );
+
     return;
   }
   const [images, total] = await apiPhotoService.getImages();
   refs.imageCard.insertAdjacentHTML('beforeend', marcupImageCard(images));
   lightBox.refresh();
-  imagesValue += images.length
+  imagesValue += images.length;
   Notiflix.Notify.info(`Hooray! We found ${total} images.`);
 }
 
